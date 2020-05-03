@@ -10,7 +10,7 @@ API para la gestion de clientes y usuarios de un gimnasio
 # Preparación del entorno
 
 * Base de datos usada postgres: https://www.postgresql.org/download/
-    * Script de las tablas en src/main/resources/
+    * Script de las tablas en src/main/resources/gym.sql
     
     * Por defecto la aplicación se ejecuta en localhost:8081
     * La base de datos en el puerto 5432
