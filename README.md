@@ -28,3 +28,20 @@ Para probar las peticiones con postman sera necesaria la autenticación del clie
 ### Usuario admin
 >Usuario: admin
 Password: admin
+
+### Usuario normal
+>Usuario:user
+Password:user
+
+#### Usuario no verificado
+> Usuario: unverified
+Password: unverified
+## Swagger
+
+Para probar las peticiones sin postman, en el navegador se pondra:
+http://[host]:[puerto]/swagger-ui.html
+
+por ejemplo:
+http://localhost:8081/swagger-ui.html
+
+Las credenciales de acceso son las mencionadas anteriormente.
