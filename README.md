@@ -31,7 +31,7 @@ Para probar las peticiones con postman sera necesaria la autenticación del clie
 
 ### Usuario normal
 >Usuario:user
->Password:user
+  Password:user
 
 #### Usuario no verificado
 > Usuario: unverified
