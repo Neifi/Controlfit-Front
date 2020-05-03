@@ -27,15 +27,15 @@ API para la gestion de clientes y usuarios de un gimnasio
 Para probar las peticiones con postman sera necesaria la autenticación del cliente.
 ### Usuario admin
 >Usuario: admin
-Password: admin
+>Password: admin
 
 ### Usuario normal
 >Usuario:user
-Password:user
+>Password:user
 
 #### Usuario no verificado
 > Usuario: unverified
-Password: unverified
+>Password: unverified
 ## Swagger
 
 Para probar las peticiones sin postman, en el navegador se pondra:
