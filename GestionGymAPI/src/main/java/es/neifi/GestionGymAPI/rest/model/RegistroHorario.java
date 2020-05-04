@@ -27,7 +27,6 @@ public class RegistroHorario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_registrohorario;
-	private int id_cliente;
 	private String horaentrada;
 	private String horasalida;
 	private int dia;
