@@ -9,9 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class ClientInfoDTO {
+public class InfoClienteDTO {
 	
-	private int id;
 	private String dni;
 	private String nombre;
 	private String apellidos;
@@ -23,8 +22,8 @@ public class ClientInfoDTO {
 	private String provincia;
 	private String telefono;
 	private String telefono_emergencia;
-	private String iban;
 	private String fecha_inscripcion;
+	private String iban;
 	
 	//private List<RegistroHorario> registrohorario;
 

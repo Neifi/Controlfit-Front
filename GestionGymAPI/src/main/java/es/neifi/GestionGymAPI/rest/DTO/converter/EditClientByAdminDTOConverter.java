@@ -3,8 +3,8 @@ package es.neifi.GestionGymAPI.rest.DTO.converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import es.neifi.GestionGymAPI.rest.DTO.CreateClienteDTO;
-import es.neifi.GestionGymAPI.rest.DTO.EditClienteByAdminDTO;
+import es.neifi.GestionGymAPI.rest.DTO.CrearClienteDTO;
+import es.neifi.GestionGymAPI.rest.DTO.EditarClienteDTO;
 import es.neifi.GestionGymAPI.rest.model.Cliente;
 import lombok.RequiredArgsConstructor;
 
@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EditClientByAdminDTOConverter {
 	private final ModelMapper modelMapper;
-	public Cliente convertToClient(EditClienteByAdminDTO dto) {
+	public Cliente convertToClient(EditarClienteDTO dto) {
 		return  modelMapper.map(dto, Cliente.class); 
 	}
 }	
