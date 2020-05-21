@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import es.neifi.GestionGymAPI.services.StorageService;
+import es.neifi.GestionGymAPI.rest.services.StorageService;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 

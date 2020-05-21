@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import es.neifi.GestionGymAPI.services.CustomUserDetailsService;
+import es.neifi.GestionGymAPI.rest.services.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 
 @Configuration

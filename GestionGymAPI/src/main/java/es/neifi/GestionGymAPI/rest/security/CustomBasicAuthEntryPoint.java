@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import es.neifi.GestionGymAPI.res.exceptions.ApiError;
+import es.neifi.GestionGymAPI.rest.exceptions.ApiError;
 import lombok.RequiredArgsConstructor;
 
 @Component

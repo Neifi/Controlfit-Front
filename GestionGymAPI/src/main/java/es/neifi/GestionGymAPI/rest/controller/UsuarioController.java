@@ -18,14 +18,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
-import es.neifi.GestionGymAPI.rest.DTO.CrearUsuarioDTO;
-import es.neifi.GestionGymAPI.rest.DTO.GetUserDTO;
-import es.neifi.GestionGymAPI.rest.DTO.SetAvatarUsuarioDTO;
-import es.neifi.GestionGymAPI.rest.DTO.converter.UsuarioDTOConverter;
-import es.neifi.GestionGymAPI.rest.model.Usuario;
-import es.neifi.GestionGymAPI.rest.model.UsuarioRepository;
-import es.neifi.GestionGymAPI.services.StorageService;
-import es.neifi.GestionGymAPI.services.UsuarioService;
+import es.neifi.GestionGymAPI.rest.model.DTO.CrearUsuarioDTO;
+import es.neifi.GestionGymAPI.rest.model.DTO.GetUserDTO;
+import es.neifi.GestionGymAPI.rest.model.DTO.SetAvatarUsuarioDTO;
+import es.neifi.GestionGymAPI.rest.model.DTO.converter.UsuarioDTOConverter;
+import es.neifi.GestionGymAPI.rest.model.usuario.Usuario;
+import es.neifi.GestionGymAPI.rest.model.usuario.UsuarioRepository;
+import es.neifi.GestionGymAPI.rest.services.StorageService;
+import es.neifi.GestionGymAPI.rest.services.UsuarioService;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 

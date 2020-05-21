@@ -23,21 +23,18 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import es.neifi.GestionGymAPI.rest.model.Cliente;
-import es.neifi.GestionGymAPI.res.exceptions.ApiError;
-import es.neifi.GestionGymAPI.res.exceptions.ClienteNotFoundException;
-import es.neifi.GestionGymAPI.rest.DTO.InfoClienteDTO;
-import es.neifi.GestionGymAPI.rest.DTO.CrearClienteDTO;
-import es.neifi.GestionGymAPI.rest.DTO.EditarClienteDTO;
-import es.neifi.GestionGymAPI.rest.DTO.converter.ClientDetailsDTOConverter;
-import es.neifi.GestionGymAPI.rest.DTO.converter.CreateClienteDTOConverter;
-import es.neifi.GestionGymAPI.rest.DTO.converter.EditClientByAdminDTOConverter;
-import es.neifi.GestionGymAPI.rest.model.ClienteRepository;
-import es.neifi.GestionGymAPI.rest.model.Rol;
-import es.neifi.GestionGymAPI.rest.model.RolConstants;
-import es.neifi.GestionGymAPI.services.AltaUsuarioService;
-import es.neifi.GestionGymAPI.services.ServerTime;
-import es.neifi.GestionGymAPI.services.UsuarioService;
+import es.neifi.GestionGymAPI.rest.exceptions.ApiError;
+import es.neifi.GestionGymAPI.rest.exceptions.ClienteNotFoundException;
+import es.neifi.GestionGymAPI.rest.model.DTO.CrearClienteDTO;
+import es.neifi.GestionGymAPI.rest.model.DTO.EditarClienteDTO;
+import es.neifi.GestionGymAPI.rest.model.DTO.InfoClienteDTO;
+import es.neifi.GestionGymAPI.rest.model.DTO.converter.ClientDetailsDTOConverter;
+import es.neifi.GestionGymAPI.rest.model.DTO.converter.CreateClienteDTOConverter;
+import es.neifi.GestionGymAPI.rest.model.DTO.converter.EditarClienteDTOConverter;
+import es.neifi.GestionGymAPI.rest.model.cliente.Cliente;
+import es.neifi.GestionGymAPI.rest.model.cliente.ClienteRepository;
+import es.neifi.GestionGymAPI.rest.model.rol.Rol;
+import es.neifi.GestionGymAPI.rest.services.UsuarioService;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 
@@ -49,7 +46,7 @@ public class ClienteController {
 	private final ClienteRepository clienteRepository;
 	private final ClientDetailsDTOConverter clienteDetailsDTOConverter;
 	private final CreateClienteDTOConverter createClienteDTOConverter;
-	private final EditClientByAdminDTOConverter editClientByAdminDTOConverter;
+	private final EditarClienteDTOConverter editClientByAdminDTOConverter;
 	/**
 	 * Obtener todos los clientes
 	 * 

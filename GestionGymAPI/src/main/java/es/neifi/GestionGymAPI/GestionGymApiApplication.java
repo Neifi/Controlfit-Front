@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import es.neifi.GestionGymAPI.services.StorageService;
+import es.neifi.GestionGymAPI.rest.services.StorageService;
 
 @SpringBootApplication
 @EnableJpaAuditing
