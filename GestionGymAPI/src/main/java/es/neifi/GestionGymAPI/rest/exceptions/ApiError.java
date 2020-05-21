@@ -17,7 +17,11 @@ import lombok.Setter;
 @Getter
 @RequiredArgsConstructor
 @NoArgsConstructor
+
+
+
 @Deprecated
+
 public class ApiError {
 	
 	@NonNull

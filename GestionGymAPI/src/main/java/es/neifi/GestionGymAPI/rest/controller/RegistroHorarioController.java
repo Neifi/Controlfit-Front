@@ -36,6 +36,17 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
+
+import es.neifi.GestionGymAPI.rest.model.cliente.Cliente;
+import es.neifi.GestionGymAPI.rest.model.DTO.InfoClienteDTO;
+import es.neifi.GestionGymAPI.rest.model.DTO.CrearClienteDTO;
+import es.neifi.GestionGymAPI.rest.model.DTO.converter.ClientDetailsDTOConverter;
+import es.neifi.GestionGymAPI.rest.exceptions.ApiError;
+import es.neifi.GestionGymAPI.rest.exceptions.ClienteNotFoundException;
+import es.neifi.GestionGymAPI.rest.model.registrohorario.RegistroHorario;
+import es.neifi.GestionGymAPI.rest.model.registrohorario.RegistroHorarioRepository;
+import es.neifi.GestionGymAPI.rest.model.cliente.ClienteRepository;
+
 import es.neifi.GestionGymAPI.rest.exceptions.ApiError;
 import es.neifi.GestionGymAPI.rest.exceptions.ClienteNotFoundException;
 import es.neifi.GestionGymAPI.rest.model.DTO.CrearClienteDTO;
@@ -45,6 +56,7 @@ import es.neifi.GestionGymAPI.rest.model.cliente.Cliente;
 import es.neifi.GestionGymAPI.rest.model.cliente.ClienteRepository;
 import es.neifi.GestionGymAPI.rest.model.registrohorario.RegistroHorario;
 import es.neifi.GestionGymAPI.rest.model.registrohorario.RegistroHorarioRepository;
+
 import lombok.RequiredArgsConstructor;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
