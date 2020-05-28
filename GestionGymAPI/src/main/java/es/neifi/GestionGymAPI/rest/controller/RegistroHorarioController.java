@@ -36,7 +36,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-
 import es.neifi.GestionGymAPI.rest.model.cliente.Cliente;
 import es.neifi.GestionGymAPI.rest.model.DTO.InfoClienteDTO;
 import es.neifi.GestionGymAPI.rest.model.DTO.CrearClienteDTO;
@@ -70,11 +69,6 @@ public class RegistroHorarioController {
 	private final ClientDetailsDTOConverter clienteDetailsDTOConverter;
 	private String dtEntrada = "";
 
-	@GetMapping("/testHora")
-	public void test() {
-		String dt = DateTime.now().toString("HH:mm:ss");
-		System.out.println(hourDiff(dt, "13:03:10"));
-	}
 
 	@GetMapping("/horario")
 	public ResponseEntity<?> obtenerTodos() {
@@ -83,12 +77,28 @@ public class RegistroHorarioController {
 		if (registros.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		} else {
-//			List<ClientInfoDTO> dtoList = registros.stream().map(clienteDetailsDTOConverter::convertToDTO)
-//					.collect(Collectors.toList());
 			return ResponseEntity.ok(registros);
 		}
 	}
 	
+	
+	@GetMapping("/horario/{id}")
+	public ResponseEntity<?> obtenerPorIdUsuario(@PathVariable int id) {
+		return ResponseEntity.ok(registroHorarioRepo.selectByUserId(id)
+				.orElseThrow(() -> new ClienteNotFoundException(id)));
+		
+	}
+	
+	
+	public ResponseEntity<?> obtenerPorIntervaloDeFecha(@RequestParam String fechaInicio, @RequestParam String fechaFin,
+			@PathVariable int id_usuario) {
+		List <RegistroHorario> registros = registroHorarioRepo.selectIntervaloFecha(fechaInicio, fechaFin, id_usuario);
+		if(registros.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}else {
+			return ResponseEntity.ok(registros);
+		}
+	}
 
 	/**
 	 * 
@@ -97,24 +107,24 @@ public class RegistroHorarioController {
 	 * @param tipoRegistro tipo de registro, entrada o salida
 	 * @return
 	 */
-//	@JsonFormat(shape = Shape.NUMBER_INT, pattern = "dd/MM/yyyy hh:mm:ss")
 //	LocalTime time = LocalTime.now();
 
+	@JsonFormat(shape = Shape.NUMBER_INT, pattern = "dd-MM-yyyy hh:mm:ss")
 	@PostMapping(path = "/horario", params = { "clientId", "tipoRegistro" })
-	public ResponseEntity<?> nuevoRegistro(@RequestParam int clientId, @RequestParam String tipoRegistro) {
+	public ResponseEntity<?> nuevoRegistro(@RequestParam int id_usuario, @RequestParam String tipoRegistro) {
 
 		if (tipoRegistro.contentEquals("e")) {
 			dtEntrada = DateTime.now().toString("HH:mm:ss");
-
-			registroHorarioRepo.insertEntry(dtEntrada, clientId, DateTime.now().getHourOfDay(),
-					DateTime.now().getMonthOfYear(), DateTime.now().getYear());
+			String fecha = DateTime.now().toString("dd-MM-yyyy");
+			registroHorarioRepo.insertEntry(dtEntrada,fecha,id_usuario);
 			return ResponseEntity.status(HttpStatus.CREATED).build();
 
 		} else if (tipoRegistro.contentEquals("s")) {
-			String dt = DateTime.now().toString("HH:mm:ss");
-			System.out.println(dt);
-			registroHorarioRepo.insertExit(dt, clientId, hourDiff(dtEntrada, dt), DateTime.now().getHourOfDay(),
-					DateTime.now().getMonthOfYear(), DateTime.now().getYear());
+			String horaSalida = DateTime.now().toString("HH:mm:ss");
+			String fecha = DateTime.now().toString("dd-MM-yyyy");
+
+			System.out.println(horaSalida);
+			registroHorarioRepo.insertExit(horaSalida,fecha,id_usuario);
 			return ResponseEntity.status(HttpStatus.CREATED).build();
 
 		} else {
@@ -122,9 +132,14 @@ public class RegistroHorarioController {
 		}
 
 	}
-
-	public String hourDiff(String entry, String exit) {
+	
+	
+	@GetMapping("/calchoras")
+	public ResponseEntity<String> hourDiff(@RequestBody RegistroHorario registroHorarioCompleto) {
 		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+		String entry = registroHorarioCompleto.getHoraentrada();
+		String exit = registroHorarioCompleto.getHorasalida();
+		
 		try {
 			Date start = format.parse(entry);
 			Date end = format.parse(exit);
@@ -137,12 +152,12 @@ public class RegistroHorarioController {
 
 			String difference = String.valueOf(hours + ":" + minutes + ":" + seconds);
 
-			return difference;
+			return ResponseEntity.accepted().body(difference);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
-		return "::";
+		return ResponseEntity.badRequest().body(" ");
 	}
 
 }

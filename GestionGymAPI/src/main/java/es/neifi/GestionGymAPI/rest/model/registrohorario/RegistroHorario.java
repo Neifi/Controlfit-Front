@@ -30,12 +30,7 @@ public class RegistroHorario {
 	private int id_registrohorario;
 	private String horaentrada;
 	private String horasalida;
-	private int dia;
-	private int mes;
-	private int anio;
+	private String fecha;
 
 
-	@ManyToOne(targetEntity = Usuario.class)
-	@JoinColumn(name = "id_usuario", updatable = false, insertable = false)
-	private Usuario usuario;
 }

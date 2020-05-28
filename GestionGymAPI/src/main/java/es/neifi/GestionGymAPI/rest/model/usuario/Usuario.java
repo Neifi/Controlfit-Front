@@ -63,7 +63,7 @@ public class Usuario implements UserDetails {
 
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_usuario", referencedColumnName = "id_cliente")
+	@JoinColumn(name="id_usuario", referencedColumnName = "id")
 	private Cliente cliente;
 	
 	
@@ -77,9 +77,7 @@ public class Usuario implements UserDetails {
 	@Column(name = "rol")
 	private Set<Rol> rol;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "usuario",fetch = FetchType.EAGER,targetEntity = RegistroHorario.class)
-	private List <RegistroHorario> registrohorario;
+
 	
 	public Usuario() {
 		super();

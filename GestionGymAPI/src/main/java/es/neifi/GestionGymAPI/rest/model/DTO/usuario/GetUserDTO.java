@@ -1,9 +1,11 @@
-package es.neifi.GestionGymAPI.rest.model.DTO;
+package es.neifi.GestionGymAPI.rest.model.DTO.usuario;
 
 import java.util.List;
 import java.util.Set;
 
+import es.neifi.GestionGymAPI.rest.model.cliente.Cliente;
 import es.neifi.GestionGymAPI.rest.model.registrohorario.RegistroHorario;
+import es.neifi.GestionGymAPI.rest.model.usuario.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class GetUserDTO {
+	private Usuario cliente;
 	private String username;
 	private String password;
 	private String avatar;

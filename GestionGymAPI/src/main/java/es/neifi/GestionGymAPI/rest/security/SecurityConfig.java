@@ -25,6 +25,7 @@ import es.neifi.GestionGymAPI.rest.services.CustomUserDetailsService;
 
 import lombok.RequiredArgsConstructor;
 
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -59,12 +60,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 					.authorizeRequests()
-//					.antMatchers(HttpMethod.POST, "/auth/login").permitAll()
-//					.antMatchers(HttpMethod.POST, "user/upload").hasAnyRole("USER")
-//					.antMatchers(HttpMethod.GET, "/**").hasAnyRole("ADMIN")
-//					.antMatchers(HttpMethod.GET, "/user/**")
-//				.hasAnyRole("USER")
-					.anyRequest().hasAnyRole("ADMIN","USER","UNVERIFIED");
+					.antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+					.antMatchers(HttpMethod.GET, "/cliente/**", "/registro/**", "/horario/**").hasRole("ADMIN")
+					.antMatchers(HttpMethod.POST, "/cliente/**", "/registro/**", "/horario/**").hasRole("ADMIN")
+					.antMatchers(HttpMethod.PUT, "/cliente/**", "/registro/**", "/horario/**").hasRole("ADMIN")
+					.antMatchers(HttpMethod.DELETE, "/cliente/**", "/registro/**", "/horario/**").hasRole("ADMIN")
+					.antMatchers(HttpMethod.POST, "user/upload").hasAnyRole("ADMIN","USER")
+					.antMatchers(HttpMethod.GET, "/user/**").hasAnyRole("ADMIN","USER")
+					.anyRequest().authenticated();
 
 		// filtro
 		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);

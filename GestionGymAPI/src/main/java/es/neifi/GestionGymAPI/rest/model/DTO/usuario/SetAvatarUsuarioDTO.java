@@ -1,4 +1,4 @@
-package es.neifi.GestionGymAPI.rest.model.DTO;
+package es.neifi.GestionGymAPI.rest.model.DTO.usuario;
 
 import org.springframework.context.annotation.Bean;
 

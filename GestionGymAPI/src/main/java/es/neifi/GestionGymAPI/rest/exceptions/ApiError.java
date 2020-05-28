@@ -20,7 +20,7 @@ import lombok.Setter;
 
 
 
-@Deprecated
+
 
 public class ApiError {
 	
