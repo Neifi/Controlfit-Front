@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class MaterialDashboardAngularPage {
+export class GestionGym {
   navigateTo() {
     return browser.get('/');
   }

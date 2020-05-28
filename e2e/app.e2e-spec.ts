@@ -1,14 +1,11 @@
-import { MaterialDashboardAngularPage } from './app.po';
+import { GestionGym } from './app.po';
 
-describe('material-dashboard-angular App', () => {
-  let page: MaterialDashboardAngularPage;
+describe('GestionGym', () => {
+  let page: GestionGym;
 
   beforeEach(() => {
-    page = new MaterialDashboardAngularPage();
+    page = new GestionGym();
   });
 
-  it('should display message saying app works', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
-  });
+
 });
