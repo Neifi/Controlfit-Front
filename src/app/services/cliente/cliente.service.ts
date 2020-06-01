@@ -7,7 +7,7 @@ import { Cliente } from 'app/model/Cliente';
 export class ClienteService {
 
 
-  private  URL = "https://controlfit.herokuapp.com/api/cliente/";
+  private  URL = " https://controlfit.herokuapp.com/api/cliente/";
   constructor(private httpClient:HttpClient) {
 
    }
