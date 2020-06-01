@@ -38,9 +38,7 @@ export class AddClienteComponent implements OnInit {
     if (this.form.valid) {
       this.cliente = this.form.value;
       this.clienteService.postCliente(this.cliente).subscribe((res: any) => {
-        
-      
-        if (res.body == 201 || res.body == 200) {
+        if (res.body != 500) {
           this.form.reset();
           this.saved();
         }else{

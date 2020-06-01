@@ -82,7 +82,7 @@ export class DashboardComponent implements OnInit {
       const subsMensuales: any = {
           labels: ['sem 1', 'sem 2', 'sem 3', 'sem 4'],
           series: [
-              [12, 17, 7,11]
+              [1, 0, 0,0]
           ]
       };
 

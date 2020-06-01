@@ -3,10 +3,11 @@ import { DashboardComponent } from "app/components/dashboard/dashboard.component
 import { LogedAuthGuard } from "app/components/login/services/loged.auth.guard.service";
 import { AdminRoleAuthGuardService } from "app/services/guards/admin-role-auth-guard.service";
 import { UserProfileComponent } from "app/components/user-profile/user-profile.component";
-import { TableListComponent } from "app/components/table-list/table-list.component";
+
 import { RutinasComponent } from "app/components/rutinas/rutinas.component";
 import { UserRoleAuthGuardService } from "app/services/guards/user-role-auth-guard.service";
 import { LogoutComponent } from "app/components/logout/logout.component";
+import { TableListComponent } from "app/components/lista-usuarios/table-list.component";
 
 
 export const AdminLayoutRoutes: Routes = [
