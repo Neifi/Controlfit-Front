@@ -6,14 +6,15 @@ import { RouterModule } from "@angular/router";
 import { AppRoutingModule } from "./app.routing";
 import { ComponentsModule } from "./components/components.module";
 import { AppComponent } from "./app.component";
-import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
+import { AdminLayoutComponent } from "./components/layouts/admin-layout/admin-layout.component";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
-import { BasicAuthHttpInterceptorService } from "./service/basic-auth-http-interceptor.service";
-import { AuthGuard } from "./components/login/services/auth.guard.service";
-import { UsuarioService } from "./service/usuario/usuario.service";
-import { ConfirmarBorrarClienteComponent } from "./dialogs/confirmar-borrar-cliente/confirmar-borrar-cliente.component";
+
+
+import { LogedAuthGuard } from "./components/login/services/loged.auth.guard.service";
+import { UsuarioService } from "./services/usuario/usuario.service";
+import { ConfirmarBorrarClienteComponent } from "./components/dialogs/confirmar-borrar-cliente/confirmar-borrar-cliente.component";
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from "@angular/core";
-import { AddClienteComponent } from "./dialogs/add-cliente/add-cliente.component";
+import { AddClienteComponent } from "./components/dialogs/add-cliente/add-cliente.component";
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {PortalModule} from '@angular/cdk/portal';
@@ -55,6 +56,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import { BasicAuthHttpInterceptorService } from "./services/basic-auth-http-interceptor.service";
 export function parameterProviderFactory(provider: UsuarioService) {
   return () => provider.getUsuario();
 }
@@ -131,7 +133,7 @@ export function parameterProviderFactory(provider: UsuarioService) {
       multi: true,
     },
 
-    AuthGuard,
+    LogedAuthGuard,
     UsuarioService,
   ],
   bootstrap: [AppComponent],

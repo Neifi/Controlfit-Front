@@ -1,33 +1,44 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
+import { LogedAuthGuard } from "./loged.auth.guard.service";
+import { Router } from "@angular/router";
+import decode from 'jwt-decode';
+
 @Injectable({
   providedIn: "root",
 })
 export class LoginServiceService {
-  private url = "http://localhost:8081/auth/login";
+  private url = "https://controlfit.herokuapp.com/auth/login";
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient,private router:Router) {}
 
   public authenticate(username: string, password: string) {
     return this.http
-      .post<any>(this.url, { username, password })
+      .post<any>(this.url, { username, password},{observe:'response'})
       .pipe(
-        map((userData) => {
-          sessionStorage.setItem("username", username);
-          let token = "Bearer " + userData.token;
-          sessionStorage.setItem("token", token);
-          return userData;
+        map((data) => {
+          let token = data.body.token;
+          localStorage.setItem("token", token);
+          this.router.navigate(["dashboard"]);
+          return data;
         })
+        
       );
+      
   }
 
-  isLoged() {
-    let user = sessionStorage.getItem("username");
-    return !(user === null);
+  public isLoged():boolean {
+    let token = localStorage.getItem("token");
+    if(token == null){
+      
+      return false;
+    }
+    
+    return true;
   }
 
-  logOut() {
-    sessionStorage.removeItem("username");
+  public logOut() {
+    localStorage.removeItem("token");
   }
 }

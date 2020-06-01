@@ -1,8 +1,9 @@
 <hgroup>
   <h1>ControlFit</h1>
   <h3>Todo el control bajo tus manos</h3>
+  <img src="../../../assets/img/favicon.png" alt="">
 </hgroup>
-<form>
+<form (keydown)="enter($event)">
   <div class="group">
     <input
       [(ngModel)]="username"
