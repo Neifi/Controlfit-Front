@@ -23,17 +23,46 @@ export class AddClienteComponent implements OnInit {
       Validators.pattern("[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]"),
       Validators.required,
     ]),
-    nombre: new FormControl("", [Validators.required]),
-    apellidos: new FormControl("", [Validators.required]),
-    calle: new FormControl("", [Validators.required]),
-    ciudad: new FormControl("", [Validators.required]),
-    provincia: new FormControl("", [Validators.required]),
-    codigo_postal: new FormControl("", [Validators.required]),
+    nombre: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(10),
+    ]),
+    apellidos: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(10),
+    ]),
+    calle: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(10),
+    ]),
+    ciudad: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(10),
+    ]),
+    provincia: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(10),
+    ]),
+    codigo_postal: new FormControl("", [
+      Validators.required,
+      Validators.pattern("[0-9][0-9][0-9][0-9][0-9]"),
+      Validators.minLength(5),
+      Validators.maxLength(5),
+    ]),
     fecha_nacimiento: new FormControl("", [Validators.required]),
   });
 
-  constructor(public clienteService: ClienteService,private snackBar: MatSnackBar) {}
+  constructor(
+    public clienteService: ClienteService,
+    private snackBar: MatSnackBar
+  ) {}
 
+  
   saveCliente() {
     if (this.form.valid) {
       this.cliente = this.form.value;
@@ -41,28 +70,34 @@ export class AddClienteComponent implements OnInit {
         if (res.body != 500) {
           this.form.reset();
           this.saved();
-        }else{
+        } else {
           this.error();
-      }
-    });
-  }else{
-    this.invalid();
+        }
+      });
+    } else {
+      this.invalid();
+    }
   }
-}
 
   setUserRol() {
     this.clienteService.postCliente(this.cliente).subscribe();
   }
   public saved() {
-    this.snackBar.open("Cliente guardado correctamente", "Cerrar",{duration: 3000});
+    this.snackBar.open("Cliente guardado correctamente", "Cerrar", {
+      duration: 3000,
+    });
   }
 
   public error() {
-    this.snackBar.open("No se ha podido guardar al cliente", "Cerrar",{duration: 3000});
+    this.snackBar.open("No se ha podido guardar al cliente", "Cerrar", {
+      duration: 3000,
+    });
   }
 
   public invalid() {
-    this.snackBar.open("Compruebe todos los campos", "Cerrar",{duration: 3000});
+    this.snackBar.open("Compruebe todos los campos", "Cerrar", {
+      duration: 3000,
+    });
   }
 
   ngOnInit(): void {}
