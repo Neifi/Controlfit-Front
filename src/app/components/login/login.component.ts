@@ -39,8 +39,12 @@ export class LoginComponent implements OnInit {
         this.invalidLogin = false;
         localStorage.setItem("token",data.body.token);
         this.router.navigate(["dashboard"]);
-        
-        
+        if(data.status == 404){
+          this.invalidCredError();
+        }
+        if(data.status == 500){
+          this.serverError();
+        }
       },
       (error) => {
         this.error();
@@ -55,8 +59,15 @@ export class LoginComponent implements OnInit {
       this.login();
     }
   }
+  public invalidCredError() {
+    this.snackbar.open("Credenciales erroneas","",{duration: 3000});
+  }
   public error() {
     this.snackbar.open("Compruebe los datos e intentelo de nuevo","",{duration: 3000});
   }
+  public serverError() {
+    this.snackbar.open("Se ha producido un error intentelo de nuevo en unos minutos","",{duration: 3000});
+  }
+  
   ngOnInit(): void {}
 }

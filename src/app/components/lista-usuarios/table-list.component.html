@@ -65,7 +65,7 @@
           <div class="card-body">
             <form [formGroup]="form" (ngSubmit)="updateCliente()">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <mat-form-field class="example-full-width">
                     <input
                       matInput
@@ -76,7 +76,7 @@
                     />
                   </mat-form-field>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <mat-form-field class="example-full-width">
                     <input
                       matInput
@@ -87,18 +87,7 @@
                     />
                   </mat-form-field>
                 </div>
-                <div class="col-md-4">
-                  <mat-form-field class="example-full-width">
-                    <input
-                      matInput
-                      placeholder="Fecha de inscripción"
-                      type="text"
-                      
-                      formControlName="fecha_inscripcion"
-
-                    />
-                  </mat-form-field>
-                </div>
+          
               </div>
               <div class="row">
                 <div class="col-md-4">
@@ -185,16 +174,18 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <mat-form-field class="example-full-width">
                     <input
+                      disabled
                       matInput
                       placeholder="Fecha de nacimiento"
-                      type="text"
-                      formControlName="fecha_nacimiento"
+                      type="datetime"
+                      [value]="fechana"
                     />
                   </mat-form-field>
                 </div>
+                
               </div>
               <button
                 

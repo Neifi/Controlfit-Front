@@ -10,20 +10,49 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   styleUrls: ["./user-profile.component.css"],
 })
 export class UserProfileComponent implements OnInit {
+  private ptDatePattern =  /^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g;
   public cliente = new Cliente();
+  public fechana ="";
   imgData: File = null;
-
+  
   public form = new FormGroup({
-    email: new FormControl(),
-    fecha_inscripcion: new FormControl(""),
-    dni: new FormControl(""),
-    nombre: new FormControl(""),
-    apellidos: new FormControl(""),
-    calle: new FormControl(""),
-    ciudad: new FormControl(""),
-    provincia: new FormControl(""),
-    codigo_postal: new FormControl(""),
-    fecha_nacimiento: new FormControl(""),
+    email: new FormControl("", [Validators.email, Validators.required]),
+    dni: new FormControl("", [
+      Validators.pattern("[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]"),
+      Validators.required,
+    ]),
+    nombre: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(10),
+    ]),
+    apellidos: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(10),
+    ]),
+    calle: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(50),
+    ]),
+    ciudad: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(50),
+    ]),
+    provincia: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(10),
+    ]),
+    codigo_postal: new FormControl("", [
+      Validators.required,
+      Validators.pattern("[0-9][0-9][0-9][0-9][0-9]"),
+      Validators.minLength(5),
+      Validators.maxLength(5),
+    ]),
+    fecha_nacimiento: new FormControl("", [Validators.required,Validators.pattern(this.ptDatePattern)]),
   });
 
   constructor(private snackBar:MatSnackBar,private usuarioService: UsuarioService) {
@@ -31,7 +60,6 @@ export class UserProfileComponent implements OnInit {
       this.cliente = data;
       
       this.form.get("email").setValue(data["email"]);
-      this.form.get("fecha_inscripcion").setValue(data["fecha_inscripcion"]);
       this.form.get("dni").setValue(data["dni"]);
       this.form.get("nombre").setValue(data["nombre"]);
       this.form.get("apellidos").setValue(data["apellidos"]);
@@ -39,14 +67,14 @@ export class UserProfileComponent implements OnInit {
       this.form.get("ciudad").setValue(data["ciudad"]);
       this.form.get("provincia").setValue(data["provincia"]);
       this.form.get("codigo_postal").setValue(parseInt( data["codigo_postal"]));
-      this.form.get("fecha_nacimiento").setValue(data["fecha_nacimiento"]);
+      this.fechana = data["fecha_nacimiento"];
     });
   }
 
   public updateUser() {
     this.usuarioService.putCliente(this.form.value).subscribe((data) => {
       this.cliente = this.form.value;
-      if(data.body == 201 || data.body == 200){
+      if(data.status == 201 || data.status == 200){
         this.snackBar.open('Actualizado con exito');
       }else{
         this.snackBar.open('Fallo en actualizar los datos del cliente');

@@ -41,4 +41,6 @@ export class LoginServiceService {
   public logOut() {
     localStorage.removeItem("token");
   }
+
+  
 }

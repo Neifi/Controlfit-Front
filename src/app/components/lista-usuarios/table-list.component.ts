@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Cliente } from "app/model/Cliente";
 import { RegistroHorario } from "app/model/RegistroHorario";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { DialogresponseService } from "../dialogs/services/dialogresponse.service";
 import { ClienteService } from "app/services/cliente/cliente.service";
@@ -17,17 +17,47 @@ export class TableListComponent implements OnInit {
   public clientes = [Cliente];
   public cliente = new Cliente();
   public registrosHorario = [RegistroHorario];
+  public fechana = "";
   public form = new FormGroup({
-    email: new FormControl(),
-    fecha_inscripcion: new FormControl(""),
-    dni: new FormControl(""),
-    nombre: new FormControl(""),
-    apellidos: new FormControl(""),
-    calle: new FormControl(""),
-    ciudad: new FormControl(""),
-    provincia: new FormControl(""),
-    codigo_postal: new FormControl(""),
-    fecha_nacimiento: new FormControl(""),
+    email: new FormControl("", [Validators.email, Validators.required]),
+    dni: new FormControl("", [
+      Validators.pattern("[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]"),
+      Validators.required,
+    ]),
+    nombre: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(10),
+    ]),
+    apellidos: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(10),
+    ]),
+    calle: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(50),
+    ]),
+    ciudad: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(50),
+    ]),
+    provincia: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(10),
+    ]),
+    codigo_postal: new FormControl("", [
+      Validators.required,
+      Validators.pattern("[0-9][0-9][0-9][0-9][0-9]"),
+      Validators.minLength(5),
+      Validators.maxLength(5),
+    ]),
+    fecha_nacimiento: new FormControl("", [Validators.required]),
+    rol:new FormControl("",[Validators.required]),
+    
   });
   constructor(
     private snackBar: MatSnackBar,
@@ -51,7 +81,6 @@ export class TableListComponent implements OnInit {
     this.clienteService.getCliente(id).subscribe((data: any) => {
       this.cliente = data;
       this.form.get("email").setValue(data["email"]);
-      this.form.get("fecha_inscripcion").setValue(data["fecha_inscripcion"]);
       this.form.get("dni").setValue(data["dni"]);
       this.form.get("nombre").setValue(data["nombre"]);
       this.form.get("apellidos").setValue(data["apellidos"]);
@@ -59,8 +88,8 @@ export class TableListComponent implements OnInit {
       this.form.get("ciudad").setValue(data["ciudad"]);
       this.form.get("provincia").setValue(data["provincia"]);
       this.form.get("codigo_postal").setValue(data["codigo_postal"]);
-      this.form.get("fecha_nacimiento").setValue(data["fecha_nacimiento"]);
       localStorage.setItem("id_cliente", id.toString());
+      this.fechana = data["fecha_nacimiento"];
       this.getRegistrosHorarios(id);
     });
   }

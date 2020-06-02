@@ -36,12 +36,12 @@ export class AddClienteComponent implements OnInit {
     calle: new FormControl("", [
       Validators.required,
       Validators.minLength(5),
-      Validators.maxLength(10),
+      Validators.maxLength(50),
     ]),
     ciudad: new FormControl("", [
       Validators.required,
       Validators.minLength(5),
-      Validators.maxLength(10),
+      Validators.maxLength(50),
     ]),
     provincia: new FormControl("", [
       Validators.required,
@@ -66,13 +66,14 @@ export class AddClienteComponent implements OnInit {
   saveCliente() {
     if (this.form.valid) {
       this.cliente = this.form.value;
-      this.clienteService.postCliente(this.cliente).subscribe((res: any) => {
-        if (res.body != 500) {
+      this.clienteService.postCliente(this.cliente).subscribe((res) => {
+        if (res.status != 500) {
           this.form.reset();
           this.saved();
-        } else {
+        }else if(res.status == 500){
           this.error();
         }
+        
       });
     } else {
       this.invalid();
