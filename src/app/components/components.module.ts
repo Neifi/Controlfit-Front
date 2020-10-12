@@ -11,9 +11,10 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { UnverifiedComponent } from './unverified/unverified.component';
 import { RutinasComponent } from "./rutinas/rutinas.component";
+import { LoadingComponent } from './loading/loading.component';
 @NgModule({
   imports: [CommonModule, RouterModule, ReactiveFormsModule, FormsModule],
-  declarations: [ RutinasComponent,SidebarComponent, LoginComponent, UnverifiedComponent],
+  declarations: [ RutinasComponent,SidebarComponent, LoginComponent, UnverifiedComponent, LoadingComponent],
 exports: [RutinasComponent, SidebarComponent,MatDialogModule,MatButtonModule,MatButtonToggleModule],
 schemas:[NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA],
 

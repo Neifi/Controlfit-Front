@@ -11,7 +11,7 @@
       [class.used]="isUsed"
       (change)="onTextChange()"
       type="text"
-      value="admin"
+     
     /><span class="highlight" name="usuario" required></span
     ><span class="bar"></span>
     <label>Usuario</label>
@@ -23,12 +23,15 @@
       [class.used]="isUsed"
       (change)="onTextChange()"
       type="password"
-      value="admin"
     /><span class="highlight"></span><span class="bar"></span>
     <label>Contraseña</label>
   </div>
   <button (click)="login()" type="button" class="button buttonBlue">
+    <span *ngIf="isLoaded" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+
     Iniciar sesión
   </button>
+ 
 </form>
+
 <footer></footer>

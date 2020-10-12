@@ -16,39 +16,47 @@ export class LoginComponent implements OnInit {
   isUsed: boolean;
   inputPassword = new FormControl("inputUsername");
   inputUsername = new FormControl("inputUsername");
- 
+  isLoaded:boolean
   constructor(
     private loginService: LoginServiceService,
     private router: Router,
     private snackbar:MatSnackBar
-  ) {}
-
-  username = "";
-  password = "";
-  role: any;
-  invalidLogin = false;
-
-  onTextChange() {
+  ) {
     this.isUsed = true;
   }
 
+  username = "admin";
+  password = "admin";
+    
+  role: any;
+  invalidLogin = false;
+
+  
+
   login() {
     
+    this.isLoaded = true;
+
     this.loginService.authenticate(this.username, this.password).subscribe(
       (data) => {
         this.invalidLogin = false;
         localStorage.setItem("token",data.body.token);
+        this.isLoaded = true;
         this.router.navigate(["dashboard"]);
+     
         if(data.status == 404){
           this.invalidCredError();
+          
         }
         if(data.status == 500){
           this.serverError();
         }
+        this.isLoaded = false;
       },
       (error) => {
         this.error();
         this.invalidLogin = true;
+        this.isLoaded = false;
       }
     );
   }
