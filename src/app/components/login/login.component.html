@@ -9,7 +9,6 @@
       [(ngModel)]="username"
       name="username"
       [class.used]="isUsed"
-      (change)="onTextChange()"
       type="text"
      
     /><span class="highlight" name="usuario" required></span
@@ -21,7 +20,6 @@
       [(ngModel)]="password"
       name="password"
       [class.used]="isUsed"
-      (change)="onTextChange()"
       type="password"
     /><span class="highlight"></span><span class="bar"></span>
     <label>Contraseña</label>
