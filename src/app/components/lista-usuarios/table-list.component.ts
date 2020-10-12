@@ -71,7 +71,6 @@ export class TableListComponent implements OnInit {
 
   public getClientes() {
     this.clienteService.getClientes().subscribe((data: [any]) => {
-      console.log(data);
 
       this.clientes = data;
     });
