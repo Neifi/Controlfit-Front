@@ -48,7 +48,7 @@
     "jquery": "3.5.0",
     "jwt-decode": "^2.2.0",
     "modules": "^0.4.0",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "path": "^0.12.7",
     "perfect-scrollbar": "1.1.0",
     "popper.js": "1.15.0",
